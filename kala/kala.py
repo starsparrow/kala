@@ -5,7 +5,8 @@ from time import strftime as timestamp
 from flask import Flask, flash, request, session, redirect, url_for, render_template
 
 app = Flask(__name__)
-app.secret_key = 'CHANGE ME'
+app.secret_key = 'the butts are highly susceptible'
+application = app
 
 TIME_FORMAT = '%Y-%m-%d %H:%I:%S'
 MESSAGE_LIMIT = 20 
@@ -47,7 +48,7 @@ def is_valid_message(message):
     if message == None:
         return True 
     else:
-        return message not in badwords and len(message) > 0
+        return message not in badwords and 255 > len(message) > 0
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -77,7 +78,7 @@ def no_password():
 
 @app.route('/clear/<password>')
 def force_clear(password):
-    if password == 'CHANGEME':
+    if password == 'hoobastank':
         clear_messages()
     else:
         flash('failed to clear messages. invalid password')

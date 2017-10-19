@@ -1,20 +1,35 @@
-<title>kala</title>
-<h3>kala - ephemeral message board</h3>
+<html>
+
+<head>
+	<title>kala</title>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="main">
+<p id="gohome"><a href="http://starsparrow.com"># back to starsparrow.com</a></p>
+<hr />
+<h3>kala &raquo; ephemeral message board</h3>
 
 <form action="" method="post">
 <p>your message: <input type="text" name="message" id="messageField"> <input type="submit" value="send"></p>
+<p class="disclaimer">this is a public service. the creator and host of this site can take no responsibility for the content posted by users.</p>
 </form>
 
 {% for _ in get_flashed_messages() %}
-<p style='color: #bc5151;'>{{ _ }}</p>
+<p class="flash">{{ _ }}</p>
 {% endfor %}
 
-<hr style='height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);' />
-<p>message log (newest at top):</p>
+<hr class="message-log" />
+<p class="message-log"><a href=''>[refresh]</a> message log (newest at top):</p>
 {% for message in messages %}
-<p style='color: gray;'>{{ message['chatter']  }} @ {{ message['time'] }} &raquo; <span style='color: black;'> {{ message['content'] }}</span></p>
+<p><span class="preamble">{{ message['chatter']  }} @ {{ message['time'] }} &raquo; </span><span class="message"> {{ message['content'] }}</span></p>
 {% endfor %}
+</div>
 
 <script>
 document.getElementById("messageField").focus();
 </script>
+
+</body>
